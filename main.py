@@ -77,10 +77,12 @@ async def get_current_user_optional(credentials: Optional[HTTPAuthorizationCrede
 
 # Rota principal
 @app.get("/")
-async def root(request: Request, current_user = Depends(get_current_user_optional)):
+async def root(request: Request):
+    # Para a página principal, vamos sempre renderizar sem verificar autenticação no backend
+    # A verificação será feita no frontend via JavaScript
     return templates.TemplateResponse("index.html", {
         "request": request, 
-        "user": current_user
+        "user": None  # Sempre None, verificação será no frontend
     })
 
 # Rota de login
@@ -103,6 +105,13 @@ async def subscribe_page(request: Request):
 async def health_check():
     return {"status": "online", "version": "1.0.0"}
 
+# Rota para verificar usuário logado via token
+@app.get("/api/user/me")
+async def get_current_user_info(current_user = Depends(get_current_user_optional)):
+    if current_user:
+        return {"user": current_user, "authenticated": True}
+    return {"user": None, "authenticated": False}
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True) 
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
