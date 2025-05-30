@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Devocionais Personalizados{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-container">
+        <div class="mdc-card auth-card">
+            <div class="card-content">
+                <!-- Mensagem especial para quem vem da landing page -->
+                <div id="landing-message" class="landing-message" style="display: none;">
+                    <div class="message-icon">✨</div>
+                    <h3>Que bom que você quer experimentar!</h3>
+                    <p>Faça login ou cadastre-se para receber seu primeiro devocional personalizado gratuitamente.</p>
+                </div>
+                
+                <h2 class="auth-title">Entrar</h2>
+                
+                <form id="login-form">
+                    <div class="mdc-text-field mdc-text-field--outlined auth-input">
+                        <input type="email" id="email" name="email" class="mdc-text-field__input" required>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="email" class="mdc-floating-label">E-mail</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mdc-text-field mdc-text-field--outlined auth-input">
+                        <input type="password" id="password" name="password" class="mdc-text-field__input" required>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="password" class="mdc-floating-label">Senha</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="error-message" class="error-message" style="display: none;"></div>
+                    
+                    <div class="button-container">
+                        <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Entrar</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="auth-separator">
+                    <span>ou</span>
+                </div>
+                
+                <div class="social-login">
+                    <button id="google-login" class="mdc-button mdc-button--outlined social-button">
+                        <span class="mdc-button__ripple"></span>
+                        <img src="{{ url_for('static', path='/img/google-logo.svg') }}" alt="Google" class="social-icon">
+                        <span class="mdc-button__label">Entrar com Google</span>
+                    </button>
+                </div>
+                
+                <div class="auth-links">
+                    <a href="/signup" class="auth-link">Não tem uma conta? Cadastre-se</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se vem da landing page
+        const urlParams = new URLSearchParams(window.location.search);
+        const isFromLanding = urlParams.get('try') === 'true';
+        const redirectUrl = urlParams.get('redirect') || '/';
+        
+        if (isFromLanding) {
+            document.getElementById('landing-message').style.display = 'block';
+            
+            // Tracking para conversão
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'landing_to_login', {
+                    'event_category': 'conversion',
+                    'event_label': 'clicked_cta_from_landing'
+                });
+            }
+        }
+        
+        // Inicializar componentes MDC
+        document.querySelectorAll('.mdc-text-field').forEach(function(el) {
+            new mdc.textField.MDCTextField(el);
+        });
+        
+        // Formulário de login
+        const form = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                showError('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            // Mostrar indicador de carregamento
+            document.querySelector('.button-container').innerHTML = '<div class="loading-spinner">⏳ Entrando...</div>';
+            
+            try {
+                const response = await fetch('/api/auth/login-json', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Restaurar botão
+                document.querySelector('.button-container').innerHTML = `
+                    <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Entrar</span>
+                    </button>
+                `;
+                
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Erro ao fazer login');
+                }
+                
+                // Salvar token no localStorage
+                localStorage.setItem('auth_token', data.access_token);
+                
+                // Tracking de conversão bem-sucedida
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'login_success', {
+                        'event_category': 'conversion',
+                        'event_label': isFromLanding ? 'from_landing' : 'direct'
+                    });
+                }
+                
+                // Redirecionar
+                if (isFromLanding) {
+                    // Mostrar mensagem de sucesso antes de redirecionar
+                    showSuccess('Login realizado! Redirecionando para seu primeiro devocional...');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 2000);
+                } else {
+                    window.location.href = redirectUrl;
+                }
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                showError('Email ou senha incorretos. Por favor, tente novamente.');
+                
+                // Restaurar botão em caso de erro
+                document.querySelector('.button-container').innerHTML = `
+                    <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Entrar</span>
+                    </button>
+                `;
+            }
+        });
+        
+        // Link para cadastro com parâmetros
+        const signupLink = document.querySelector('a[href="/signup"]');
+        if (signupLink && isFromLanding) {
+            signupLink.href = '/signup?try=true&redirect=' + encodeURIComponent(redirectUrl);
+        }
+        
+        // Login com Google
+        document.getElementById('google-login').addEventListener('click', function() {
+            // Aqui você implementaria a autenticação com o Google via Supabase
+            alert('Autenticação com Google será implementada em breve!');
+        });
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            errorMessage.className = 'error-message';
+        }
+        
+        function showSuccess(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            errorMessage.className = 'success-message';
+        }
+    });
+</script>
+            
+            try {
+                // Usando a nova rota que aceita JSON
+                const response = await fetch('/api/auth/login-json', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Restaurar botão
+                document.querySelector('.button-container').innerHTML = `
+                    <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Entrar</span>
+                    </button>
+                `;
+                
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Erro ao fazer login');
+                }
+                
+                // Salvar token no localStorage
+                localStorage.setItem('token', data.access_token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Redirecionar para a página solicitada
+                window.location.href = redirectUrl;
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                showError('Email ou senha incorretos. Por favor, tente novamente.');
+                
+                // Restaurar botão em caso de erro
+                document.querySelector('.button-container').innerHTML = `
+                    <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Entrar</span>
+                    </button>
+                `;
+            }
+        });
+        
+        // Login com Google
+        document.getElementById('google-login').addEventListener('click', function() {
+            // Aqui você implementaria a autenticação com o Google via Supabase
+            // Por enquanto, apenas mostramos uma mensagem
+            alert('Autenticação com Google será implementada em breve!');
+        });
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+    });
+</script>
+{% endblock %} 

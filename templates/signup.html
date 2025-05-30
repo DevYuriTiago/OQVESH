@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro - Devocionais Personalizados{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-container">
+        <div class="mdc-card auth-card">
+            <div class="card-content">
+                <h2 class="auth-title">Criar Conta</h2>
+                
+                <form id="signup-form">
+                    <div class="mdc-text-field mdc-text-field--outlined auth-input">
+                        <input type="text" id="nome" name="nome" class="mdc-text-field__input">
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="nome" class="mdc-floating-label">Nome (opcional)</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mdc-text-field mdc-text-field--outlined auth-input">
+                        <input type="email" id="email" name="email" class="mdc-text-field__input" required>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="email" class="mdc-floating-label">E-mail</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mdc-text-field mdc-text-field--outlined auth-input">
+                        <input type="password" id="password" name="password" class="mdc-text-field__input" required minlength="6">
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="password" class="mdc-floating-label">Senha</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mdc-text-field mdc-text-field--outlined auth-input">
+                        <input type="password" id="confirm-password" name="confirm-password" class="mdc-text-field__input" required minlength="6">
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="confirm-password" class="mdc-floating-label">Confirmar Senha</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="error-message" class="error-message" style="display: none;"></div>
+                    
+                    <div class="button-container">
+                        <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Cadastrar</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="auth-separator">
+                    <span>ou</span>
+                </div>
+                
+                <div class="social-login">
+                    <button id="google-signup" class="mdc-button mdc-button--outlined social-button">
+                        <span class="mdc-button__ripple"></span>
+                        <img src="{{ url_for('static', path='/img/google-logo.svg') }}" alt="Google" class="social-icon">
+                        <span class="mdc-button__label">Cadastrar com Google</span>
+                    </button>
+                </div>
+                
+                <div class="auth-links">
+                    <a href="/login" class="auth-link">Já tem uma conta? Faça login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar componentes MDC
+        document.querySelectorAll('.mdc-text-field').forEach(function(el) {
+            new mdc.textField.MDCTextField(el);
+        });
+        
+        // Formulário de cadastro
+        const form = document.getElementById('signup-form');
+        const errorMessage = document.getElementById('error-message');
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Validação básica
+            if (!email || !password) {
+                showError('Por favor, preencha os campos obrigatórios.');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('A senha deve ter pelo menos 6 caracteres.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError('As senhas não coincidem.');
+                return;
+            }
+            
+            // Mostrar indicador de carregamento
+            document.querySelector('.button-container').innerHTML = '<div class="loading-spinner"></div>';
+            
+            try {
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password,
+                        nome
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Restaurar botão
+                document.querySelector('.button-container').innerHTML = `
+                    <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Cadastrar</span>
+                    </button>
+                `;
+                
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Erro ao criar conta');
+                }
+                
+                // Salvar token no localStorage
+                localStorage.setItem('token', data.access_token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Redirecionar para a página inicial
+                window.location.href = '/';
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                showError('Erro ao criar conta: ' + error.message);
+                
+                // Restaurar botão em caso de erro
+                document.querySelector('.button-container').innerHTML = `
+                    <button type="submit" class="mdc-button mdc-button--raised auth-button">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Cadastrar</span>
+                    </button>
+                `;
+            }
+        });
+        
+        // Cadastro com Google
+        document.getElementById('google-signup').addEventListener('click', function() {
+            // Aqui você implementaria a autenticação com o Google via Supabase
+            // Por enquanto, apenas mostramos uma mensagem
+            alert('Cadastro com Google será implementado em breve!');
+        });
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Assinar - Devocionais Personalizados{% endblock %}
+
+{% block head %}
+<!-- SDK MercadoPago.js -->
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="subscription-container">
+        <h1 class="main-title">Assine Devocionais Personalizados</h1>
+        
+        <div class="mdc-card subscription-info-card">
+            <div class="card-content">
+                <h2>Plano Mensal</h2>
+                
+                <div class="subscription-details">
+                    <div class="price-container">
+                        <span class="price">R$ 29,90</span>
+                        <span class="price-period">/mês</span>
+                    </div>
+                    
+                    <ul class="subscription-features">
+                        <li>
+                            <span class="material-icons">check_circle</span>
+                            <span>Devocionais ilimitados</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">check_circle</span>
+                            <span>Acesso a todos os recursos</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">check_circle</span>
+                            <span>Suporte prioritário</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">check_circle</span>
+                            <span>Cancelamento a qualquer momento</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="payment-buttons" class="payment-buttons">
+                    <div id="wallet_container"></div>
+                    
+                    <button id="checkout-button" class="mdc-button mdc-button--raised">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Assinar com Cartão</span>
+                    </button>
+                </div>
+                
+                <div id="payment-processing" class="payment-processing" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Processando pagamento...</p>
+                </div>
+                
+                <div class="payment-security">
+                    <span class="material-icons">lock</span>
+                    <span>Pagamento seguro via Mercado Pago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar autenticação
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        
+        if (!token || !user.id) {
+            window.location.href = '/login?redirect=/subscribe';
+            return;
+        }
+        
+        // Botões de pagamento
+        const checkoutButton = document.getElementById('checkout-button');
+        const paymentButtons = document.getElementById('payment-buttons');
+        const paymentProcessing = document.getElementById('payment-processing');
+        
+        // Inicializar botão de checkout
+        checkoutButton.addEventListener('click', async function() {
+            // Mostrar indicador de carregamento
+            paymentButtons.style.display = 'none';
+            paymentProcessing.style.display = 'block';
+            
+            try {
+                // Obter preferência de pagamento
+                const response = await fetch('/api/mp/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ user_id: user.id })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao criar preferência de pagamento');
+                }
+                
+                const data = await response.json();
+                
+                // Redirecionar para checkout do Mercado Pago
+                window.location.href = data.init_point;
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao processar pagamento: ' + error.message);
+                
+                // Restaurar botões em caso de erro
+                paymentButtons.style.display = 'block';
+                paymentProcessing.style.display = 'none';
+            }
+        });
+        
+        // Inicializar Mercado Pago Wallet (botão de pagamento)
+        async function initMercadoPago() {
+            try {
+                // Obter preferência de pagamento
+                const response = await fetch('/api/mp/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ user_id: user.id })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao criar preferência de pagamento');
+                }
+                
+                const data = await response.json();
+                
+                // Inicializar SDK do Mercado Pago
+                const mp = new MercadoPago(data.public_key, {
+                    locale: 'pt-BR'
+                });
+                
+                // Renderizar botão de pagamento
+                mp.checkout({
+                    preference: {
+                        id: data.preference_id
+                    },
+                    render: {
+                        container: '#wallet_container',
+                        label: 'Pagar'
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Erro ao inicializar Mercado Pago:', error);
+                document.getElementById('wallet_container').innerHTML = `
+                    <div class="payment-error">
+                        Erro ao carregar opções de pagamento. Por favor, tente novamente.
+                    </div>
+                `;
+            }
+        }
+        
+        // Inicializar Mercado Pago (descomentado em produção)
+        initMercadoPago();
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="description" content="Receba devocionais personalizados baseados em seus sentimentos. Conecte seu coração a Deus através de palavras inspiradoras.">
+    <title>{% block title %}Devocionais Personalizados - Conecte seu coração a Deus{% endblock %}</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Google Fonts - Melhoradas para melhor legibilidade -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Design Web Components -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Devocionais">
+    
+    {% block head %}{% endblock %}
+</head>
+<body>    <header class="mdc-top-app-bar" {% if not user %}style="display: none;"{% endif %}>
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Menu">
+                    <span class="material-icons">menu</span>
+                </button>
+                <span class="mdc-top-app-bar__title">✨ Devocionais Personalizados</span>
+            </section>            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <div id="user-status">
+                    {% if user %}
+                        <div class="user-info">
+                            <span class="user-avatar">👤</span>
+                            <span class="user-name">{{ user.nome or user.email }}</span>
+                        </div>
+                        <button class="mdc-button" onclick="showUserMenu()">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div id="user-menu" class="user-menu" style="display: none;">
+                            <a href="/profile" class="menu-item">📝 Perfil</a>
+                            <a href="/history" class="menu-item">📚 Histórico</a>
+                            <a href="/logout" class="menu-item">🚪 Sair</a>
+                        </div>
+                    {% else %}
+                        <a href="/login" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Entrar</span>
+                        </a>
+                        <a href="/signup" class="mdc-button mdc-button--raised">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Cadastrar</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </header>    <div class="{% if user %}mdc-top-app-bar--fixed-adjust{% endif %}">
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>{% if user %}
+    <footer class="app-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Devocionais Personalizados</h4>
+                <p>Conectando corações a Deus através de palavras inspiradoras</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Úteis</h4>
+                <a href="/about">Sobre</a>
+                <a href="/contact">Contato</a>
+                <a href="/privacy">Privacidade</a>
+            </div>
+            <div class="footer-section">
+                <h4>Siga-nos</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="WhatsApp">💬</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Devocionais Personalizados. Feito com ❤️ para glorificar a Deus.</p>
+            </div>
+        </div>
+    </footer>
+    {% endif %}
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar componentes MDC
+        document.querySelectorAll('.mdc-button').forEach(function(el) {
+            mdc.ripple.MDCRipple.attachTo(el);
+        });
+        
+        // Menu do usuário
+        function showUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('user-menu');
+            const userStatus = document.getElementById('user-status');
+            
+            if (menu && !userStatus.contains(event.target)) {
+                menu.style.display = 'none';
+            }
+        });
+        
+        // Efeito de scroll no header
+        let lastScrollTop = 0;
+        const header = document.querySelector('.mdc-top-app-bar');
+        
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Adicionar classe de blur quando rolar
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        
+        document.querySelectorAll('.mdc-text-field').forEach(function(el) {
+            mdc.textField.MDCTextField.attachTo(el);
+        });
+    </script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html> 
