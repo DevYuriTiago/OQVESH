@@ -100,6 +100,14 @@ async def signup_page(request: Request):
 async def subscribe_page(request: Request):
     return templates.TemplateResponse("subscribe.html", {"request": request})
 
+# Rota para dashboard (requer autenticação)
+@app.get("/dashboard")
+async def dashboard_page(request: Request, current_user = Depends(get_current_user)):
+    return templates.TemplateResponse("dashboard.html", {
+        "request": request, 
+        "user": current_user
+    })
+
 # Rota para verificação de status
 @app.get("/health")
 async def health_check():
@@ -111,6 +119,80 @@ async def get_current_user_info(current_user = Depends(get_current_user_optional
     if current_user:
         return {"user": current_user, "authenticated": True}
     return {"user": None, "authenticated": False}
+
+# Rota para estatísticas do usuário
+@app.get("/api/user/stats")
+async def get_user_stats(current_user = Depends(get_current_user)):
+    try:
+        supabase = get_supabase_client()
+        
+        # Contar devocionais salvos
+        devotionals = supabase.table("saved_devotionals").select("id").eq("user_id", current_user["id"]).execute()
+        devotionals_count = len(devotionals.data) if devotionals.data else 0
+        
+        # Calcular streak (simplificado por enquanto)
+        streak_count = 7  # Placeholder - implementar lógica real
+        
+        return {
+            "devotionalsCount": devotionals_count,
+            "streakCount": streak_count
+        }
+    except Exception as e:
+        return {"devotionalsCount": 0, "streakCount": 0}
+
+# Rota para configurações do usuário
+@app.get("/api/user/settings")
+async def get_user_settings(current_user = Depends(get_current_user)):
+    try:
+        supabase = get_supabase_client()
+        
+        # Buscar configurações do usuário
+        settings = supabase.table("user_settings").select("*").eq("user_id", current_user["id"]).execute()
+        
+        if settings.data and len(settings.data) > 0:
+            return settings.data[0]
+        else:
+            # Retornar configurações padrão
+            return {
+                "emailNotifications": True,
+                "saveHistory": True
+            }
+    except Exception as e:
+        return {
+            "emailNotifications": True,
+            "saveHistory": True
+        }
+
+# Rota para gerar devocional (compatibilidade com o dashboard)
+@app.post("/generate_devotional")
+async def generate_devotional_endpoint(request: Request, current_user = Depends(get_current_user)):
+    try:
+        data = await request.json()
+        sentimento = data.get("sentimento", "")
+        
+        if not sentimento:
+            raise HTTPException(status_code=400, detail="Sentimento é obrigatório")
+        
+        # Importar a cadeia de devocional
+        from chains.devotional_chain import generate_devotional
+        
+        # Gerar o devocional
+        devotional = generate_devotional(sentimento)
+        
+        # Atualizar contador de uso
+        supabase = get_supabase_client()
+        usage = supabase.table("usages").select("*").eq("user_id", current_user["id"]).execute()
+        
+        if usage.data and len(usage.data) > 0:
+            current_count = usage.data[0].get("devotional_count", 0)
+            supabase.table("usages").update({"devotional_count": current_count + 1}).eq("user_id", current_user["id"]).execute()
+        else:
+            supabase.table("usages").insert({"user_id": current_user["id"], "devotional_count": 1}).execute()
+        
+        return devotional
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro ao gerar devocional: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

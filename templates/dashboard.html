@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Devocionais Personalizados{% endblock %}
+
+{% block content %}
+<!-- HAMBURGER MENU -->
+<div id="hamburger-menu" class="hamburger-menu">
+    <button id="menu-toggle" class="menu-toggle">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+</div>
+
+<!-- SIDEBAR NAVIGATION -->
+<nav id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h3>Dashboard</h3>
+        <button id="close-sidebar" class="close-sidebar">&times;</button>
+    </div>
+    
+    <ul class="sidebar-menu">
+        <li class="menu-item active" data-section="devotionals">
+            <a href="#" class="menu-link">
+                <i class="menu-icon">🙏</i>
+                <span>Devocionais</span>
+            </a>
+        </li>
+        <li class="menu-item" data-section="subscriptions">
+            <a href="#" class="menu-link">
+                <i class="menu-icon">💳</i>
+                <span>Assinaturas</span>
+            </a>
+        </li>
+        <li class="menu-item" data-section="profile">
+            <a href="#" class="menu-link">
+                <i class="menu-icon">👤</i>
+                <span>Perfil</span>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="sidebar-footer">
+        <div class="menu-item" data-section="settings">
+            <a href="#" class="menu-link">
+                <i class="menu-icon">⚙️</i>
+                <span>Configurações</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="#" class="menu-link" onclick="logout()">
+                <i class="menu-icon">🚪</i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN CONTENT AREA -->
+<div id="main-content" class="main-content">
+    <!-- DEVOCIONAIS SECTION -->
+    <div id="devotionals-section" class="content-section active">
+        <div class="container">
+            <div class="feeling-form-container">
+                <div id="feeling-form-section" class="fade-in">
+                    <h1 class="main-title">✨ O que você está sentindo hoje? ✨</h1>
+                    <p class="subtitle">Permita que Deus fale ao seu coração através de uma palavra personalizada</p>
+                    
+                    <div class="mdc-card feeling-card interactive-element">
+                        <div class="card-content">
+                            <div class="feeling-icons">
+                                <div class="emoji-option" data-feeling="alegre">😊</div>
+                                <div class="emoji-option" data-feeling="triste">😢</div>
+                                <div class="emoji-option" data-feeling="ansioso">😰</div>
+                                <div class="emoji-option" data-feeling="grato">🙏</div>
+                                <div class="emoji-option" data-feeling="esperançoso">🌟</div>
+                                <div class="emoji-option" data-feeling="preocupado">😟</div>
+                            </div>
+                            
+                            <form id="feeling-form" method="post">
+                                <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea feeling-input">
+                                    <textarea class="mdc-text-field__input" id="sentimento" name="sentimento" rows="4" required 
+                                        placeholder="Descreva seus sentimentos... Ex: Estou me sentindo ansioso com o trabalho, mas confiante em Deus..."></textarea>
+                                    <div class="mdc-notched-outline">
+                                        <div class="mdc-notched-outline__leading"></div>
+                                        <div class="mdc-notched-outline__notch">
+                                            <label for="sentimento" class="mdc-floating-label">💭 Compartilhe o que está em seu coração...</label>
+                                        </div>
+                                        <div class="mdc-notched-outline__trailing"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="button-container">
+                                    <button type="submit" id="generate-btn" class="mdc-button mdc-button--raised">
+                                        <span class="mdc-button__ripple"></span>
+                                        <span class="mdc-button__label">
+                                            <span class="btn-text">🙏 Gerar Devocional</span>
+                                            <span class="loading" style="display: none;"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div class="inspirational-quote">
+                                <p>"Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará." - Salmos 37:5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="devotional-result" class="mdc-card devotional-card" style="display: none;">
+                    <div class="card-content">
+                        <button id="back-button" class="devotional-back-button">
+                            <span>←</span>
+                        </button>
+                        
+                        <div class="devotional-header">
+                            <div class="devotional-icon">🙏</div>
+                            <h2 id="sentiment-header">Sua Palavra de Hoje</h2>
+                            <div class="devotional-date"></div>
+                        </div>
+                        
+                        <div class="devotional-body">
+                            <div id="devotional-greeting" class="devotional-greeting slide-in-left"></div>
+                            
+                            <div class="devotional-verse slide-in-right">
+                                <div class="verse-icon">📖</div>
+                                <blockquote id="devotional-verse-text" class="verse-text"></blockquote>
+                                <cite id="devotional-verse-reference" class="verse-reference"></cite>
+                            </div>
+                            
+                            <div id="devotional-content" class="devotional-text slide-in-up"></div>
+                            
+                            <div class="devotional-actions">
+                                <button id="share-btn" class="action-btn share-btn">
+                                    <span class="btn-icon">📤</span>
+                                    <span>Compartilhar</span>
+                                </button>
+                                <button id="save-btn" class="action-btn save-btn">
+                                    <span class="btn-icon">💾</span>
+                                    <span>Salvar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASSINATURAS SECTION -->
+    <div id="subscriptions-section" class="content-section">
+        <div class="container">
+            <h1 class="section-title">💳 Assinaturas</h1>
+            <div class="subscription-plans">
+                <div class="plan-card">
+                    <h3>Plano Básico</h3>
+                    <div class="price">R$ 9,90/mês</div>
+                    <ul class="features">
+                        <li>5 devocionais por dia</li>
+                        <li>Histórico de 30 dias</li>
+                        <li>Compartilhamento</li>
+                    </ul>
+                    <button class="plan-btn">Assinar</button>
+                </div>
+                <div class="plan-card featured">
+                    <h3>Plano Premium</h3>
+                    <div class="price">R$ 19,90/mês</div>
+                    <ul class="features">
+                        <li>Devocionais ilimitados</li>
+                        <li>Histórico completo</li>
+                        <li>Categorias personalizadas</li>
+                        <li>Suporte prioritário</li>
+                    </ul>
+                    <button class="plan-btn">Assinar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERFIL SECTION -->
+    <div id="profile-section" class="content-section">
+        <div class="container">
+            <h1 class="section-title">👤 Perfil</h1>
+            <div class="profile-content">
+                <div class="profile-info">
+                    <div class="avatar">👤</div>
+                    <h2 id="user-name">Carregando...</h2>
+                    <p id="user-email">Carregando...</p>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <h3>Devocionais Gerados</h3>
+                        <span id="devotionals-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Dias Consecutivos</h3>
+                        <span id="streak-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIGURAÇÕES SECTION -->
+    <div id="settings-section" class="content-section">
+        <div class="container">
+            <h1 class="section-title">⚙️ Configurações</h1>
+            <div class="settings-content">
+                <div class="setting-group">
+                    <h3>Notificações</h3>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="email-notifications">
+                        <span class="slider"></span>
+                        Receber notificações por email
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h3>Privacidade</h3>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="save-history">
+                        <span class="slider"></span>
+                        Salvar histórico de devocionais
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h3>Conta</h3>
+                    <button class="danger-btn">Excluir Conta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- OVERLAY -->
+<div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

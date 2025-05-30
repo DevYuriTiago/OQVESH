@@ -5,765 +5,446 @@
 {% block content %}
 <!-- CONTEÚDO DINÂMICO BASEADO EM AUTENTICAÇÃO -->
 <div id="landing-page-content" style="display: none;">
-<!-- LANDING PAGE DE CONVERSÃO -->
-<div class="landing-page">
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-icon">✨</span>
-                    <span>Mais de 10.000 pessoas transformadas</span>
-                </div>
-                
-                <h1 class="hero-title">
-                    Transforme seus <span class="highlight">momentos difíceis</span> 
-                    em <span class="highlight">encontros com Deus</span>
-                </h1>
-                
-                <p class="hero-subtitle">
-                    Receba devocionais personalizados baseados exatamente no que você está sentindo. 
-                    Uma palavra de Deus específica para o seu coração, no momento que você mais precisa.
-                </p>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Sentem paz após usar</div>
+    <!-- LANDING PAGE DE CONVERSÃO -->
+    <div class="landing-page">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-icon">✨</span>
+                        <span>Mais de 10.000 pessoas transformadas</span>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">5min</div>
-                        <div class="stat-label">Para gerar seu devocional</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Disponível sempre</div>
-                    </div>
-                </div>
-                
-                <div class="hero-cta">
-                    <button onclick="startFreeExperience()" class="cta-button primary-cta">
-                        <span class="cta-icon">🙏</span>
-                        <span class="cta-text">Experimentar Grátis Agora</span>
-                        <span class="cta-subtitle">Seu primeiro devocional é gratuito</span>
-                    </button>
                     
-                    <div class="trust-indicators">
-                        <span class="trust-item">⚡ Resultado em 30 segundos</span>
-                        <span class="trust-item">🔒 100% Seguro e Privado</span>
-                        <span class="trust-item">❤️ Baseado na Bíblia</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="preview-card">
-                    <div class="preview-header">
-                        <div class="preview-avatar">🙏</div>
-                        <div class="preview-info">
-                            <div class="preview-name">Devocional para Maria</div>
-                            <div class="preview-feeling">Sentindo ansiedade</div>
-                        </div>
-                    </div>
-                    <div class="preview-content">
-                        <h3>"Não andeis ansiosos por coisa alguma..."</h3>
-                        <p>Querida Maria, sei que seu coração está inquieto hoje. As preocupações parecem maiores que sua fé, mas...</p>
-                        <div class="preview-verse">📖 Filipenses 4:6-7</div>
-                    </div>
-                </div>
-                
-                <div class="floating-elements">
-                    <div class="floating-heart">💖</div>
-                    <div class="floating-star">⭐</div>
-                    <div class="floating-dove">🕊️</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Problem Section -->
-    <section class="problem-section">
-        <div class="container">
-            <h2 class="section-title">Você já se sentiu assim?</h2>
-            
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">😰</div>
-                    <h3>Ansiedade tomando conta</h3>
-                    <p>Preocupações que não saem da mente, medos sobre o futuro, aquela sensação de que tudo pode dar errado...</p>
-                </div>
-                
-                <div class="problem-card">
-                    <div class="problem-icon">😢</div>
-                    <h3>Tristeza profunda</h3>
-                    <p>Momentos de melancolia, luto, decepções que doem no peito e fazem questionar onde Deus está...</p>
-                </div>
-                
-                <div class="problem-card">
-                    <div class="problem-icon">😔</div>
-                    <h3>Solidão espiritual</h3>
-                    <p>Sensação de distância de Deus, orações que parecem não ser ouvidas, falta de direção na vida...</p>
-                </div>
-            </div>
-            
-            <div class="problem-statement">
-                <p>Nesses momentos, você precisa de mais do que um devocional genérico. Você precisa de uma palavra que fale diretamente ao seu coração.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Solution Section -->
-    <section class="solution-section">
-        <div class="container">
-            <div class="solution-content">
-                <div class="solution-text">
-                    <h2 class="section-title">Imagine receber uma carta de Deus escrita especialmente para você</h2>
+                    <h1 class="hero-title">
+                        Transforme seus <span class="highlight">momentos difíceis</span> 
+                        em <span class="highlight">encontros com Deus</span>
+                    </h1>
                     
-                    <div class="solution-benefits">
-                        <div class="benefit-item">
-                            <div class="benefit-icon">🎯</div>
-                            <div class="benefit-text">
-                                <h4>Personalizado para seu momento</h4>
-                                <p>Não é um devocional aleatório. É uma mensagem criada com base no que você está vivendo agora.</p>
-                            </div>
+                    <p class="hero-subtitle">
+                        Receba devocionais personalizados baseados exatamente no que você está sentindo. 
+                        Uma palavra de Deus específica para o seu coração, no momento que você mais precisa.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Sentem paz após usar</div>
                         </div>
-                        
-                        <div class="benefit-item">
-                            <div class="benefit-icon">📚</div>
-                            <div class="benefit-text">
-                                <h4>Fundamentado na Palavra</h4>
-                                <p>Cada devocional inclui versículos bíblicos relevantes e uma reflexão profunda e consoladora.</p>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5min</div>
+                            <div class="stat-label">Para gerar seu devocional</div>
                         </div>
-                        
-                        <div class="benefit-item">
-                            <div class="benefit-icon">⚡</div>
-                            <div class="benefit-text">
-                                <h4>Disponível a qualquer hora</h4>
-                                <p>Seja 2h da manhã ou no meio do dia de trabalho - quando você precisar, estamos aqui.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="solution-visual">
-                    <div class="solution-demo">
-                        <div class="demo-step active" data-step="1">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Compartilhe seu sentimento</h4>
-                                <div class="step-example">"Estou me sentindo perdido na vida..."</div>
-                            </div>
-                        </div>
-                        
-                        <div class="demo-step" data-step="2">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>Aguarde 30 segundos</h4>
-                                <div class="step-example">Nossa IA analisa e busca na Bíblia</div>
-                            </div>
-                        </div>
-                        
-                        <div class="demo-step" data-step="3">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>Receba sua mensagem</h4>
-                                <div class="step-example">Um devocional único para você</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Social Proof Section -->
-    <section class="social-proof-section">
-        <div class="container">
-            <h2 class="section-title">Veja o que outras pessoas estão dizendo</h2>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Foi exatamente o que eu precisava ouvir. Como se Deus tivesse falado diretamente comigo através deste devocional."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👩</div>
-                        <div class="author-info">
-                            <div class="author-name">Ana Paula</div>
-                            <div class="author-location">São Paulo, SP</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Uso todos os dias. É incrível como sempre recebo a palavra certa para o que estou passando. Mudou minha rotina de oração."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👨</div>
-                        <div class="author-info">
-                            <div class="author-name">Carlos Silva</div>
-                            <div class="author-location">Rio de Janeiro, RJ</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Estava passando por uma fase muito difícil. O devocional que recebi me trouxe uma paz que eu não sentia há meses."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👩‍🦳</div>
-                        <div class="author-info">
-                            <div class="author-name">Maria Santos</div>
-                            <div class="author-location">Belo Horizonte, MG</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Urgency Section -->
-    <section class="urgency-section">
-        <div class="container">
-            <div class="urgency-content">
-                <h2>Seu coração está esperando uma palavra de Deus</h2>
-                <p>Cada dia que passa sem essa conexão especial com Deus é um dia a menos de paz, direção e propósito em sua vida.</p>
-                
-                <div class="urgency-stats">
-                    <div class="urgency-stat">
-                        <div class="stat-icon">⏰</div>
-                        <div class="stat-text">
-                            <div class="stat-title">Apenas 2 minutos</div>
-                            <div class="stat-desc">Para transformar seu dia</div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Disponível sempre</div>
                         </div>
                     </div>
                     
-                    <div class="urgency-stat">
-                        <div class="stat-icon">🎁</div>
-                        <div class="stat-text">
-                            <div class="stat-title">Primeiro devocional grátis</div>
-                            <div class="stat-desc">Sem compromisso</div>
+                    <div class="hero-cta">
+                        <button onclick="startFreeExperience()" class="cta-button primary-cta">
+                            <span class="cta-icon">🙏</span>
+                            <span class="cta-text">Experimentar Grátis Agora</span>
+                            <span class="cta-subtitle">Seu primeiro devocional é gratuito</span>
+                        </button>
+                        
+                        <div class="trust-indicators">
+                            <span class="trust-item">⚡ Resultado em 30 segundos</span>
+                            <span class="trust-item">🔒 100% Seguro e Privado</span>
+                            <span class="trust-item">❤️ Baseado na Bíblia</span>
                         </div>
                     </div>
                 </div>
                 
-                <button onclick="startFreeExperience()" class="cta-button secondary-cta">
-                    <span class="cta-text">Quero Meu Devocional Personalizado</span>
-                    <span class="cta-arrow">→</span>
-                </button>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">Perguntas Frequentes</h2>
-            
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Como funciona o devocional personalizado?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Você compartilha como está se sentindo, nossa inteligência artificial analisa seu estado emocional e busca na Bíblia versículos e palavras que falam diretamente ao seu coração. Em segundos, você recebe um devocional único e personalizado.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>É realmente baseado na Bíblia?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutamente! Todos os devocionais são fundamentados nas Sagradas Escrituras. Utilizamos versículos bíblicos relevantes e criamos reflexões que estão alinhadas com os ensinamentos cristãos.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Meus dados pessoais ficam seguros?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Sim! Seus sentimentos e informações são tratados com total privacidade e segurança. Não compartilhamos seus dados com terceiros e você pode deletar suas informações a qualquer momento.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Posso usar quantas vezes quiser?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>O primeiro devocional é completamente gratuito. Após isso, oferecemos planos acessíveis para você continuar recebendo palavras personalizadas de Deus sempre que precisar.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Final CTA -->
-    <section class="final-cta-section">
-        <div class="container">
-            <div class="final-cta-content">
-                <h2>Deus tem uma palavra especial para você hoje</h2>
-                <p>Não deixe esse momento passar. Clique abaixo e receba sua mensagem personalizada agora mesmo.</p>
-                
-                <button onclick="startFreeExperience()" class="cta-button final-cta">
-                    <span class="cta-icon">✨</span>
-                    <span class="cta-text">Começar Minha Jornada Espiritual</span>
-                </button>
-                
-                <div class="final-guarantees">
-                    <span>🔒 Seguro e Privado</span>
-                    <span>⚡ Resultado em 30 segundos</span>
-                    <span>💝 Primeiro devocional grátis</span>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-</div>
-
-<div id="dashboard-content" style="display: none;">
-<!-- DASHBOARD DO USUÁRIO LOGADO -->
-<div class="container">
-    <div class="feeling-form-container">
-        <div id="feeling-form-section" class="fade-in">
-            <h1 class="main-title">✨ O que você está sentindo hoje? ✨</h1>
-            <p class="subtitle">Permita que Deus fale ao seu coração através de uma palavra personalizada</p>
-            
-            <div class="mdc-card feeling-card interactive-element">
-                <div class="card-content">
-                    <div class="feeling-icons">
-                        <div class="emoji-option" data-feeling="alegre">😊</div>
-                        <div class="emoji-option" data-feeling="triste">😢</div>
-                        <div class="emoji-option" data-feeling="ansioso">😰</div>
-                        <div class="emoji-option" data-feeling="grato">🙏</div>
-                        <div class="emoji-option" data-feeling="esperançoso">🌟</div>
-                        <div class="emoji-option" data-feeling="preocupado">😟</div>
-                    </div>
-                    
-                    <form id="feeling-form" method="post">
-                        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea feeling-input">
-                            <textarea class="mdc-text-field__input" id="sentimento" name="sentimento" rows="4" required 
-                                placeholder="Descreva seus sentimentos... Ex: Estou me sentindo ansioso com o trabalho, mas confiante em Deus..."></textarea>
-                            <div class="mdc-notched-outline">
-                                <div class="mdc-notched-outline__leading"></div>
-                                <div class="mdc-notched-outline__notch">
-                                    <label for="sentimento" class="mdc-floating-label">💭 Compartilhe o que está em seu coração...</label>
-                                </div>
-                                <div class="mdc-notched-outline__trailing"></div>
+                <div class="hero-visual">
+                    <div class="preview-card">
+                        <div class="preview-header">
+                            <div class="preview-avatar">🙏</div>
+                            <div class="preview-info">
+                                <div class="preview-name">Devocional para Maria</div>
+                                <div class="preview-feeling">Sentindo ansiedade</div>
                             </div>
                         </div>
-                        
-                        <div class="button-container">
-                            <button type="submit" id="generate-btn" class="mdc-button mdc-button--raised">
-                                <span class="mdc-button__ripple"></span>
-                                <span class="mdc-button__label">
-                                    <span class="btn-text">🙏 Gerar Devocional</span>
-                                    <span class="loading" style="display: none;"></span>
-                                </span>
-                            </button>
+                        <div class="preview-content">
+                            <h3>"Não andeis ansiosos por coisa alguma..."</h3>
+                            <p>Querida Maria, sei que seu coração está inquieto hoje. As preocupações parecem maiores que sua fé, mas...</p>
+                            <div class="preview-verse">📖 Filipenses 4:6-7</div>
                         </div>
-                    </form>
+                    </div>
                     
-                    <div class="inspirational-quote">
-                        <p>"Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará." - Salmos 37:5</p>
+                    <div class="floating-elements">
+                        <div class="floating-heart">💖</div>
+                        <div class="floating-star">⭐</div>
+                        <div class="floating-dove">🕊️</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div id="devotional-result" class="mdc-card devotional-card" style="display: none;">
-            <div class="card-content">
-                <button id="back-button" class="devotional-back-button">
-                    <span>←</span>
-                </button>
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="container">
+                <h2 class="section-title">Você já se sentiu assim?</h2>
                 
-                <div class="devotional-header">
-                    <div class="devotional-icon">🙏</div>
-                    <h2 id="sentiment-header">Sua Palavra de Hoje</h2>
-                    <div class="devotional-date"></div>
-                </div>
-                
-                <div class="devotional-body">
-                    <div id="devotional-greeting" class="devotional-greeting slide-in-left"></div>
-                    
-                    <div class="devotional-verse-container">
-                        <div class="verse-icon">📖</div>
-                        <p id="devotional-verse-text" class="devotional-verse-text"></p>
-                        <cite id="devotional-verse-reference" class="verse-reference"></cite>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">😰</div>
+                        <h3>Ansiedade tomando conta</h3>
+                        <p>Preocupações que não saem da mente, medos sobre o futuro, aquela sensação de que tudo pode dar errado...</p>
                     </div>
                     
-                    <div id="devotional-content" class="devotional-content slide-in-right"></div>
+                    <div class="problem-card">
+                        <div class="problem-icon">😢</div>
+                        <h3>Tristeza profunda</h3>
+                        <p>Momentos de melancolia, luto, decepções que doem no peito e fazem questionar onde Deus está...</p>
+                    </div>
                     
-                    <div class="devotional-actions">
-                        <button id="share-btn" class="mdc-button mdc-button--outlined">
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">📤 Compartilhar</span>
-                        </button>
+                    <div class="problem-card">
+                        <div class="problem-icon">😔</div>
+                        <h3>Solidão espiritual</h3>
+                        <p>Sensação de distância de Deus, orações que parecem não ser ouvidas, falta de direção na vida...</p>
+                    </div>
+                </div>
+                
+                <div class="problem-statement">
+                    <p>Nesses momentos, você precisa de mais do que um devocional genérico. Você precisa de uma palavra que fale diretamente ao seu coração.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Solution Section -->
+        <section class="solution-section">
+            <div class="container">
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h2 class="section-title">Imagine receber uma carta de Deus escrita especialmente para você</h2>
                         
-                        <button id="save-btn" class="mdc-button mdc-button--outlined">
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">💾 Salvar</span>
-                        </button>
-                        
-                        <button id="new-devotional-btn" class="mdc-button mdc-button--raised">
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">✨ Novo Devocional</span>
-                        </button>
+                        <div class="solution-benefits">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🎯</div>
+                                <div class="benefit-text">
+                                    <h4>Personalizado para seu momento</h4>
+                                    <p>Não é um devocional aleatório. É uma mensagem criada com base no que você está vivendo agora.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">📚</div>
+                                <div class="benefit-text">
+                                    <h4>Fundamentado na Palavra</h4>
+                                    <p>Cada devocional inclui versículos bíblicos relevantes e uma reflexão profunda e consoladora.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">⚡</div>
+                                <div class="benefit-text">
+                                    <h4>Disponível a qualquer hora</h4>
+                                    <p>Seja 2h da manhã ou no meio do dia de trabalho - quando você precisar, estamos aqui.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="solution-visual">
+                        <div class="solution-demo">
+                            <div class="demo-step active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Compartilhe seu sentimento</h4>
+                                    <div class="step-example">"Estou me sentindo perdido na vida..."</div>
+                                </div>
+                            </div>
+                            
+                            <div class="demo-step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Aguarde 30 segundos</h4>
+                                    <div class="step-example">Nossa IA analisa e busca na Bíblia</div>
+                                </div>
+                            </div>
+                            
+                            <div class="demo-step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Receba sua mensagem</h4>
+                                    <div class="step-example">Um devocional único para você</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        
+        <!-- Social Proof Section -->
+        <section class="social-proof-section">
+            <div class="container">
+                <h2 class="section-title">Veja o que outras pessoas estão dizendo</h2>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Foi exatamente o que eu precisava ouvir. Como se Deus tivesse falado diretamente comigo através deste devocional."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👩</div>
+                            <div class="author-info">
+                                <div class="author-name">Ana Paula</div>
+                                <div class="author-location">São Paulo, SP</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Uso todos os dias. É incrível como sempre recebo a palavra certa para o que estou passando. Mudou minha rotina de oração."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👨</div>
+                            <div class="author-info">
+                                <div class="author-name">Carlos Silva</div>
+                                <div class="author-location">Rio de Janeiro, RJ</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Estava passando por uma fase muito difícil. O devocional que recebi me trouxe uma paz que eu não sentia há meses."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👩‍🦳</div>
+                            <div class="author-info">
+                                <div class="author-name">Maria Santos</div>
+                                <div class="author-location">Belo Horizonte, MG</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Urgency Section -->
+        <section class="urgency-section">
+            <div class="container">
+                <div class="urgency-content">
+                    <h2>Seu coração está esperando uma palavra de Deus</h2>
+                    <p>Cada dia que passa sem essa conexão especial com Deus é um dia a menos de paz, direção e propósito em sua vida.</p>
+                    
+                    <div class="urgency-stats">
+                        <div class="urgency-stat">
+                            <div class="stat-icon">⏰</div>
+                            <div class="stat-text">
+                                <div class="stat-title">Apenas 2 minutos</div>
+                                <div class="stat-desc">Para transformar seu dia</div>
+                            </div>
+                        </div>
+                        
+                        <div class="urgency-stat">
+                            <div class="stat-icon">🎁</div>
+                            <div class="stat-text">
+                                <div class="stat-title">Primeiro devocional grátis</div>
+                                <div class="stat-desc">Sem compromisso</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="startFreeExperience()" class="cta-button secondary-cta">
+                        <span class="cta-text">Quero Meu Devocional Personalizado</span>
+                        <span class="cta-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Como funciona o devocional personalizado?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Você compartilha como está se sentindo, nossa inteligência artificial analisa seu estado emocional e busca na Bíblia versículos e palavras que falam diretamente ao seu coração. Em segundos, você recebe um devocional único e personalizado.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>É realmente baseado na Bíblia?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutamente! Todos os devocionais são fundamentados nas Sagradas Escrituras. Utilizamos versículos bíblicos relevantes e criamos reflexões que estão alinhadas com os ensinamentos cristãos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Meus dados pessoais ficam seguros?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim! Seus sentimentos e informações são tratados com total privacidade e segurança. Não compartilhamos seus dados com terceiros e você pode deletar suas informações a qualquer momento.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Posso usar quantas vezes quiser?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>O primeiro devocional é completamente gratuito. Após isso, oferecemos planos acessíveis para você continuar recebendo palavras personalizadas de Deus sempre que precisar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Final CTA -->
+        <section class="final-cta-section">
+            <div class="container">
+                <div class="final-cta-content">
+                    <h2>Deus tem uma palavra especial para você hoje</h2>
+                    <p>Não deixe esse momento passar. Clique abaixo e receba sua mensagem personalizada agora mesmo.</p>
+                    
+                    <button onclick="startFreeExperience()" class="cta-button final-cta">
+                        <span class="cta-icon">✨</span>
+                        <span class="cta-text">Começar Minha Jornada Espiritual</span>
+                    </button>
+                    
+                    <div class="final-guarantees">
+                        <span>🔒 Seguro e Privado</span>
+                        <span>⚡ Resultado em 30 segundos</span>
+                        <span>💝 Primeiro devocional grátis</span>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
+
+<div id="auth-check-loading" class="auth-loading">
+    <div class="loading-spinner"></div>
+    <p>Verificando acesso...</p>
 </div>
 
-{% endblock %}
-
-{% block scripts %}
 <script>
-    // Verificar autenticação e mostrar conteúdo apropriado
-    async function initializePage() {
+// Verificação de autenticação e redirecionamento
+async function checkAuthAndRedirect() {
+    const loadingDiv = document.getElementById('auth-check-loading');
+    const landingDiv = document.getElementById('landing-page-content');
+    
+    try {
         const token = localStorage.getItem('auth_token');
-        const landingContent = document.getElementById('landing-page-content');
-        const dashboardContent = document.getElementById('dashboard-content');
         
         if (token) {
-            try {
-                const response = await fetch('/api/user/me', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                
-                const data = await response.json();
-                
-                if (data.authenticated) {
-                    // Usuário autenticado - mostrar dashboard
-                    landingContent.style.display = 'none';
-                    dashboardContent.style.display = 'block';
-                    initializeDashboard();
-                } else {
-                    // Token inválido - mostrar landing page
-                    localStorage.removeItem('auth_token');
-                    landingContent.style.display = 'block';
-                    dashboardContent.style.display = 'none';
-                    initializeLandingPage();
+            // Verificar se o token é válido
+            const response = await fetch('/api/user/me', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-            } catch (error) {
-                console.error('Erro ao verificar autenticação:', error);
-                // Em caso de erro, mostrar landing page
-                landingContent.style.display = 'block';
-                dashboardContent.style.display = 'none';
-                initializeLandingPage();
-            }
-        } else {
-            // Sem token - mostrar landing page
-            landingContent.style.display = 'block';
-            dashboardContent.style.display = 'none';
-            initializeLandingPage();
-        }
-    }
-    
-    // Funções da Landing Page
-    function initializeLandingPage() {
-        animateOnScroll();
-        animateDemoSteps();
-        animateFloatingElements();
-        
-        // Add tracking for conversion optimization
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_view', {
-                'page_title': 'Landing Page',
-                'page_location': window.location.href
             });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.authenticated) {
+                    // Usuário autenticado - redirecionar para dashboard
+                    window.location.href = '/dashboard';
+                    return;
+                }
+            }
         }
-    }
-    
-    // Função para iniciar a experiência gratuita (CTA principal)
-    function startFreeExperience() {
-        // Adicionar um efeito visual de loading no botão
-        const button = event.target.closest('.cta-button');
-        const originalContent = button.innerHTML;
         
-        button.innerHTML = '<span class="loading-spinner">⏳</span> Redirecionando...';
-        button.style.pointerEvents = 'none';
+        // Usuário não autenticado - mostrar landing page
+        loadingDiv.style.display = 'none';
+        landingDiv.style.display = 'block';
         
-        // Simular um pequeno delay para dar feedback visual
-        setTimeout(() => {
-            window.location.href = '/login?redirect=/?try=true';
-        }, 1000);
+        // Inicializar funcionalidades da landing page
+        initializeLandingPage();
+        
+    } catch (error) {
+        console.error('Erro na verificação de autenticação:', error);
+        // Em caso de erro, mostrar landing page
+        loadingDiv.style.display = 'none';
+        landingDiv.style.display = 'block';
+        initializeLandingPage();
     }
-    
-    // FAQ Toggle
-    function toggleFaq(button) {
-        const item = button.closest('.faq-item');
-        const answer = item.querySelector('.faq-answer');
+}
+
+function initializeLandingPage() {
+    // FAQ functionality
+    window.toggleFaq = function(button) {
+        const answer = button.nextElementSibling;
         const icon = button.querySelector('.faq-icon');
         
-        const isOpen = item.classList.contains('active');
-        
-        // Fechar todos os outros FAQs
-        document.querySelectorAll('.faq-item').forEach(otherItem => {
-            if (otherItem !== item) {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-answer').style.maxHeight = '0';
-                otherItem.querySelector('.faq-icon').textContent = '+';
-            }
-        });
-        
-        // Toggle do FAQ atual
-        if (isOpen) {
-            item.classList.remove('active');
-            answer.style.maxHeight = '0';
+        if (answer.style.display === 'block') {
+            answer.style.display = 'none';
             icon.textContent = '+';
         } else {
-            item.classList.add('active');
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-            icon.textContent = '−';
+            answer.style.display = 'block';
+            icon.textContent = '-';
         }
-    }
+    };
     
-    // Animações de scroll para a landing page
-    function animateOnScroll() {
-        const elements = document.querySelectorAll('.hero-content, .problem-card, .benefit-item, .testimonial-card');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        elements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-    }
+    // CTA button functionality
+    window.startFreeExperience = function() {
+        window.location.href = '/login?from=landing';
+    };
     
-    // Demo steps animation
-    function animateDemoSteps() {
-        const steps = document.querySelectorAll('.demo-step');
-        let currentStep = 0;
-        
-        function showNextStep() {
-            steps.forEach(step => step.classList.remove('active'));
-            steps[currentStep].classList.add('active');
-            currentStep = (currentStep + 1) % steps.length;
-        }
-        
-        if (steps.length > 0) {
-            setInterval(showNextStep, 3000);
-        }
-    }
+    // Demo animation
+    animateDemo();
+}
+
+function animateDemo() {
+    const steps = document.querySelectorAll('.demo-step');
+    let currentStep = 0;
     
-    // Floating elements animation
-    function animateFloatingElements() {
-        const floatingElements = document.querySelectorAll('.floating-heart, .floating-star, .floating-dove');
-        
-        floatingElements.forEach((element, index) => {
-            const duration = 3000 + (index * 1000);
-            const delay = index * 500;
-            
-            element.style.animationDuration = duration + 'ms';
-            element.style.animationDelay = delay + 'ms';
-        });
-    }
+    if (steps.length === 0) return;
     
-    // Funções do Dashboard
-    function initializeDashboard() {
-        const form = document.getElementById('feeling-form');
-        const sentimentoInput = document.getElementById('sentimento');
-        const feelingFormSection = document.getElementById('feeling-form-section');
-        const devotionalResult = document.getElementById('devotional-result');
-        const backButton = document.getElementById('back-button');
-        const emojiOptions = document.querySelectorAll('.emoji-option');
-        
-        // Emoji selection
-        emojiOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                emojiOptions.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                
-                const feeling = this.dataset.feeling;
-                const currentText = sentimentoInput.value;
-                
-                if (!currentText.includes(feeling)) {
-                    sentimentoInput.value = `Estou me sentindo ${feeling}. ${currentText}`;
-                }
-                
-                sentimentoInput.focus();
-            });
-        });
-        
-        // Form submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const sentimento = sentimentoInput.value.trim();
-            if (!sentimento) {
-                alert('Por favor, compartilhe como você está se sentindo.');
-                return;
-            }
-            
-            // Show loading state
-            const submitBtn = document.getElementById('generate-btn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const loading = submitBtn.querySelector('.loading');
-            
-            btnText.style.display = 'none';
-            loading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            
-            try {
-                const token = localStorage.getItem('auth_token');
-                const response = await fetch('/api/feelings', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        sentimento: sentimento
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Erro ao gerar devocional');
-                }
-                
-                const data = await response.json();
-                
-                // Show devotional result
-                document.getElementById('devotional-greeting').textContent = data.greeting || 'Querido(a) irmão(ã),';
-                document.getElementById('devotional-verse-text').textContent = data.versiculos?.[0]?.texto || '';
-                document.getElementById('devotional-verse-reference').textContent = data.versiculos?.[0]?.referencia || '';
-                document.getElementById('devotional-content').innerHTML = data.reflexao || data.texto;
-                
-                // Update header with sentiment
-                document.getElementById('sentiment-header').textContent = `Palavra para quem está se sentindo ${sentimento.split('.')[0].toLowerCase()}`;
-                
-                // Update date
-                document.querySelector('.devotional-date').textContent = new Date().toLocaleDateString('pt-BR', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                
-                // Hide form and show result
-                feelingFormSection.style.display = 'none';
-                devotionalResult.style.display = 'block';
-                devotionalResult.scrollIntoView({ behavior: 'smooth' });
-                
-            } catch (error) {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro ao gerar seu devocional. Tente novamente.');
-            } finally {
-                // Reset button state
-                btnText.style.display = 'inline-block';
-                loading.style.display = 'none';
-                submitBtn.disabled = false;
-            }
-        });
-        
-        // Back button
-        backButton.addEventListener('click', function() {
-            devotionalResult.style.display = 'none';
-            feelingFormSection.style.display = 'block';
-            sentimentoInput.value = '';
-            emojiOptions.forEach(opt => opt.classList.remove('selected'));
-        });
-        
-        // New devotional button
-        document.getElementById('new-devotional-btn').addEventListener('click', function() {
-            backButton.click();
-        });
-        
-        // Share functionality
-        document.getElementById('share-btn').addEventListener('click', function() {
-            const devotionalText = document.getElementById('devotional-content').textContent;
-            const verseText = document.getElementById('devotional-verse-text').textContent;
-            const verseRef = document.getElementById('devotional-verse-reference').textContent;
-            
-            const shareText = `${devotionalText}\n\n"${verseText}" - ${verseRef}\n\nGerado em: Devocionais Personalizados`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Meu Devocional Personalizado',
-                    text: shareText
-                });
-            } else {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    alert('Devocional copiado para a área de transferência!');
-                });
-            }
-        });
-        
-        // Save functionality
-        document.getElementById('save-btn').addEventListener('click', async function() {
-            const devotionalData = {
-                sentimento: sentimentoInput.value,
-                greeting: document.getElementById('devotional-greeting').textContent,
-                verse: {
-                    text: document.getElementById('devotional-verse-text').textContent,
-                    reference: document.getElementById('devotional-verse-reference').textContent
-                },
-                content: document.getElementById('devotional-content').textContent,
-                date: new Date().toISOString()
-            };
-            
-            try {
-                const token = localStorage.getItem('auth_token');
-                const response = await fetch('/api/devotional/save', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(devotionalData)
-                });
-                
-                if (response.ok) {
-                    alert('Devocional salvo com sucesso!');
-                    this.textContent = '✅ Salvo';
-                    this.disabled = true;
-                } else {
-                    throw new Error('Erro ao salvar');
-                }
-            } catch (error) {
-                console.error('Erro ao salvar:', error);
-                alert('Erro ao salvar o devocional. Tente novamente.');
-            }
-        });
-        
-        // Initialize MDC components for dashboard
-        document.querySelectorAll('.mdc-text-field').forEach(function(el) {
-            if (typeof mdc !== 'undefined' && mdc.textField) {
-                mdc.textField.MDCTextField.attachTo(el);
-            }
-        });
-    }
-    
-    // Inicializar página quando carregar
-    document.addEventListener('DOMContentLoaded', initializePage);
+    setInterval(() => {
+        steps.forEach(step => step.classList.remove('active'));
+        steps[currentStep].classList.add('active');
+        currentStep = (currentStep + 1) % steps.length;
+    }, 3000);
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', checkAuthAndRedirect);
 </script>
+
+<style>
+.auth-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 {% endblock %}

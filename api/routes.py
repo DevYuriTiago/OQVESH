@@ -13,6 +13,13 @@ router = APIRouter()
 class FeelingRequest(BaseModel):
     sentimento: str
 
+class DevotionalSaveRequest(BaseModel):
+    sentimento: str
+    greeting: str
+    verse: Dict[str, str]
+    content: str
+    date: str
+
 class DevotionalResponse(BaseModel):
     texto: str
     versiculos: list
@@ -88,6 +95,44 @@ async def process_feeling(
             detail=f"Erro ao gerar devocional: {str(e)}"
         )
 
+@router.post("/devotional/save")
+async def save_devotional(
+    request: DevotionalSaveRequest,
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
+    """
+    Salva um devocional gerado pelo usuário
+    """
+    user_id = current_user["id"]
+    supabase = get_supabase_client()
+    
+    try:
+        devotional_data = {
+            "user_id": user_id,
+            "sentimento": request.sentimento,
+            "greeting": request.greeting,
+            "verse_text": request.verse.get("text", ""),
+            "verse_reference": request.verse.get("reference", ""),
+            "content": request.content,
+            "created_at": request.date
+        }
+        
+        result = supabase.table("saved_devotionals").insert(devotional_data).execute()
+        
+        if result.data:
+            return {"success": True, "message": "Devocional salvo com sucesso"}
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Erro ao salvar devocional"
+            )
+            
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Erro ao salvar devocional: {str(e)}"
+        )
+
 @router.get("/status")
 async def get_user_status(current_user: Dict[str, Any] = Depends(get_current_user)):
     """
@@ -130,4 +175,22 @@ async def get_user_devotionals(current_user: Dict[str, Any] = Depends(get_curren
     
     devotionals = supabase.table("devotionals").select("*").eq("user_id", user_id).execute()
     
-    return devotionals.data 
+    return devotionals.data
+
+@router.get("/devotional/saved")
+async def get_saved_devotionals(current_user: Dict[str, Any] = Depends(get_current_user)):
+    """
+    Retorna todos os devocionais salvos pelo usuário
+    """
+    user_id = current_user["id"]
+    supabase = get_supabase_client()
+    
+    try:
+        result = supabase.table("saved_devotionals").select("*").eq("user_id", user_id).order("created_at", desc=True).execute()
+        return {"devotionals": result.data}
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Erro ao buscar devocionais salvos: {str(e)}"
+        )

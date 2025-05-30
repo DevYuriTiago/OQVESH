@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+
+{% block title %}Devocionais Personalizados - Transforme seus momentos com Deus{% endblock %}
+
+{% block content %}
+<!-- LANDING PAGE DE CONVERSÃO -->
+<div class="landing-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">✨</span>
+                    <span>Mais de 10.000 pessoas transformadas</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Transforme seus <span class="highlight">momentos difíceis</span> 
+                    em <span class="highlight">encontros com Deus</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Receba devocionais personalizados baseados exatamente no que você está sentindo. 
+                    Uma palavra de Deus específica para o seu coração, no momento que você mais precisa.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Sentem paz após usar</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5min</div>
+                        <div class="stat-label">Para gerar seu devocional</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Disponível sempre</div>
+                    </div>
+                </div>
+                
+                <div class="hero-cta">
+                    <button onclick="startFreeExperience()" class="cta-button primary-cta">
+                        <span class="cta-icon">🙏</span>
+                        <span class="cta-text">Experimentar Grátis Agora</span>
+                        <span class="cta-subtitle">Seu primeiro devocional é gratuito</span>
+                    </button>
+                    
+                    <div class="trust-indicators">
+                        <span class="trust-item">⚡ Resultado em 30 segundos</span>
+                        <span class="trust-item">🔒 100% Seguro e Privado</span>
+                        <span class="trust-item">❤️ Baseado na Bíblia</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <div class="preview-avatar">🙏</div>
+                        <div class="preview-info">
+                            <div class="preview-name">Devocional para Maria</div>
+                            <div class="preview-feeling">Sentindo ansiedade</div>
+                        </div>
+                    </div>
+                    <div class="preview-content">
+                        <h3>"Não andeis ansiosos por coisa alguma..."</h3>
+                        <p>Querida Maria, sei que seu coração está inquieto hoje. As preocupações parecem maiores que sua fé, mas...</p>
+                        <div class="preview-verse">📖 Filipenses 4:6-7</div>
+                    </div>
+                </div>
+                
+                <div class="floating-elements">
+                    <div class="floating-heart">💖</div>
+                    <div class="floating-star">⭐</div>
+                    <div class="floating-dove">🕊️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="section-title">Você já se sentiu assim?</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">😰</div>
+                    <h3>Ansiedade tomando conta</h3>
+                    <p>Preocupações que não saem da mente, medos sobre o futuro, aquela sensação de que tudo pode dar errado...</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">😢</div>
+                    <h3>Tristeza profunda</h3>
+                    <p>Momentos de melancolia, luto, decepções que doem no peito e fazem questionar onde Deus está...</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">😔</div>
+                    <h3>Solidão espiritual</h3>
+                    <p>Sensação de distância de Deus, orações que parecem não ser ouvidas, falta de direção na vida...</p>
+                </div>
+            </div>
+            
+            <div class="problem-statement">
+                <p>Nesses momentos, você precisa de mais do que um devocional genérico. Você precisa de uma palavra que fale diretamente ao seu coração.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution Section -->
+    <section class="solution-section">
+        <div class="container">
+            <div class="solution-content">
+                <div class="solution-text">
+                    <h2 class="section-title">Imagine receber uma carta de Deus escrita especialmente para você</h2>
+                    
+                    <div class="solution-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎯</div>
+                            <div class="benefit-text">
+                                <h4>Personalizado para seu momento</h4>
+                                <p>Não é um devocional aleatório. É uma mensagem criada com base no que você está vivendo agora.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📚</div>
+                            <div class="benefit-text">
+                                <h4>Fundamentado na Palavra</h4>
+                                <p>Cada devocional inclui versículos bíblicos relevantes e uma reflexão profunda e consoladora.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⚡</div>
+                            <div class="benefit-text">
+                                <h4>Disponível a qualquer hora</h4>
+                                <p>Seja 2h da manhã ou no meio do dia de trabalho - quando você precisar, estamos aqui.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution-visual">
+                    <div class="solution-demo">
+                        <div class="demo-step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Compartilhe seu sentimento</h4>
+                                <div class="step-example">"Estou me sentindo perdido na vida..."</div>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Aguarde 30 segundos</h4>
+                                <div class="step-example">Nossa IA analisa e busca na Bíblia</div>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Receba sua mensagem</h4>
+                                <div class="step-example">Um devocional único para você</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="container">
+            <h2 class="section-title">Veja o que outras pessoas estão dizendo</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Foi exatamente o que eu precisava ouvir. Como se Deus tivesse falado diretamente comigo através deste devocional."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩</div>
+                        <div class="author-info">
+                            <div class="author-name">Ana Paula</div>
+                            <div class="author-location">São Paulo, SP</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Uso todos os dias. É incrível como sempre recebo a palavra certa para o que estou passando. Mudou minha rotina de oração."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨</div>
+                        <div class="author-info">
+                            <div class="author-name">Carlos Silva</div>
+                            <div class="author-location">Rio de Janeiro, RJ</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Estava passando por uma fase muito difícil. O devocional que recebi me trouxe uma paz que eu não sentia há meses."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩‍🦳</div>
+                        <div class="author-info">
+                            <div class="author-name">Maria Santos</div>
+                            <div class="author-location">Belo Horizonte, MG</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Urgency Section -->
+    <section class="urgency-section">
+        <div class="container">
+            <div class="urgency-content">
+                <h2>Seu coração está esperando uma palavra de Deus</h2>
+                <p>Cada dia que passa sem essa conexão especial com Deus é um dia a menos de paz, direção e propósito em sua vida.</p>
+                
+                <div class="urgency-stats">
+                    <div class="urgency-stat">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-text">
+                            <div class="stat-title">Apenas 2 minutos</div>
+                            <div class="stat-desc">Para transformar seu dia</div>
+                        </div>
+                    </div>
+                    
+                    <div class="urgency-stat">
+                        <div class="stat-icon">🎁</div>
+                        <div class="stat-text">
+                            <div class="stat-title">Primeiro devocional grátis</div>
+                            <div class="stat-desc">Sem compromisso</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="startFreeExperience()" class="cta-button secondary-cta">
+                    <span class="cta-text">Quero Meu Devocional Personalizado</span>
+                    <span class="cta-arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Como funciona o devocional personalizado?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Você compartilha como está se sentindo, nossa inteligência artificial analisa seu estado emocional e busca na Bíblia versículos e palavras que falam diretamente ao seu coração. Em segundos, você recebe um devocional único e personalizado.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>É realmente baseado na Bíblia?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutamente! Todos os devocionais são fundamentados nas Sagradas Escrituras. Utilizamos versículos bíblicos relevantes e criamos reflexões que estão alinhadas com os ensinamentos cristãos.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Meus dados pessoais ficam seguros?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Seus sentimentos e informações são tratados com total privacidade e segurança. Não compartilhamos seus dados com terceiros e você pode deletar suas informações a qualquer momento.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Posso usar quantas vezes quiser?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O primeiro devocional é completamente gratuito. Após isso, oferecemos planos acessíveis para você continuar recebendo palavras personalizadas de Deus sempre que precisar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="final-cta-section">
+        <div class="container">
+            <div class="final-cta-content">
+                <h2>Deus tem uma palavra especial para você hoje</h2>
+                <p>Não deixe esse momento passar. Clique abaixo e receba sua mensagem personalizada agora mesmo.</p>
+                
+                <button onclick="startFreeExperience()" class="cta-button final-cta">
+                    <span class="cta-icon">✨</span>
+                    <span class="cta-text">Começar Minha Jornada Espiritual</span>
+                </button>
+                
+                <div class="final-guarantees">
+                    <span>🔒 Seguro e Privado</span>
+                    <span>⚡ Resultado em 30 segundos</span>
+                    <span>💝 Primeiro devocional grátis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/landing.js') }}"></script>
+{% endblock %}
