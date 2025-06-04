@@ -235,5 +235,65 @@
 <!-- OVERLAY -->
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<!-- Auth Check Loading -->
+<div id="auth-check-loading" class="auth-loading" style="display: none;">
+    <div class="loading-spinner"></div>
+    <p>Verificando acesso...</p>
+</div>
+
+<script>
+// Verificar autenticação antes de carregar dashboard
+async function checkAuthBeforeLoad() {
+    const loadingDiv = document.getElementById('auth-check-loading');
+    const mainContent = document.getElementById('main-content');
+    
+    loadingDiv.style.display = 'flex';
+    
+    try {
+        const token = localStorage.getItem('auth_token');
+        
+        if (!token) {
+            // Sem token - redirecionar para login
+            window.location.href = '/login';
+            return;
+        }
+        
+        // Verificar se o token é válido
+        const response = await fetch('/api/user/me', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        if (!response.ok) {
+            // Token inválido - redirecionar para login
+            localStorage.removeItem('auth_token');
+            window.location.href = '/login';
+            return;
+        }
+        
+        const data = await response.json();
+        if (!data.authenticated) {
+            // Não autenticado - redirecionar para login
+            localStorage.removeItem('auth_token');
+            window.location.href = '/login';
+            return;
+        }
+        
+        // Usuário autenticado - mostrar dashboard
+        loadingDiv.style.display = 'none';
+        
+    } catch (error) {
+        console.error('Erro na verificação de autenticação:', error);
+        // Em caso de erro, redirecionar para login
+        localStorage.removeItem('auth_token');
+        window.location.href = '/login';
+    }
+}
+
+// Executar verificação quando a página carregar
+document.addEventListener('DOMContentLoaded', checkAuthBeforeLoad);
+</script>
+
+<script src="{{ url_for('static', path='js/dashboard.js') }}"></script>
 {% endblock %}

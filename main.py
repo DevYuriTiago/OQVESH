@@ -100,12 +100,12 @@ async def signup_page(request: Request):
 async def subscribe_page(request: Request):
     return templates.TemplateResponse("subscribe.html", {"request": request})
 
-# Rota para dashboard (requer autenticação)
+# Rota para dashboard (verificação de autenticação via frontend)
 @app.get("/dashboard")
-async def dashboard_page(request: Request, current_user = Depends(get_current_user)):
+async def dashboard_page(request: Request):
     return templates.TemplateResponse("dashboard.html", {
         "request": request, 
-        "user": current_user
+        "user": None  # Verificação será feita no frontend
     })
 
 # Rota para verificação de status

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Devocionais Personalizados - Transforme seus momentos com Deus{% endblock %}
+
+{% block content %}
+<!-- CONTEÚDO DINÂMICO BASEADO EM AUTENTICAÇÃO -->
+<div id="landing-page-content" style="display: none;">
+    <!-- Landing page content será carregado do landing.html -->
+    <div class="loading-message">
+        <p>Carregando...</p>
+    </div>
+</div>
+
+<div id="auth-check-loading" class="auth-loading">
+    <div class="loading-spinner"></div>
+    <p>Verificando acesso...</p>
+</div>
+
+<script>
+// Verificação de autenticação e redirecionamento
+async function checkAuthAndRedirect() {
+    const loadingDiv = document.getElementById('auth-check-loading');
+    const landingDiv = document.getElementById('landing-page-content');
+    
+    try {
+        const token = localStorage.getItem('auth_token');
+        
+        if (token) {
+            // Verificar se o token é válido
+            const response = await fetch('/api/user/me', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.authenticated) {
+                    // Usuário autenticado - redirecionar para dashboard
+                    window.location.href = '/dashboard';
+                    return;
+                }
+            }
+        }
+        
+        // Usuário não autenticado - carregar landing page
+        loadLandingPage();
+        
+    } catch (error) {
+        console.error('Erro na verificação de autenticação:', error);
+        loadLandingPage();
+    }
+}
+
+async function loadLandingPage() {
+    const loadingDiv = document.getElementById('auth-check-loading');
+    const landingDiv = document.getElementById('landing-page-content');
+    
+    try {
+        // Carregar conteúdo da landing page
+        const response = await fetch('/static/templates/landing-content.html');
+        const content = await response.text();
+        
+        landingDiv.innerHTML = content;
+        loadingDiv.style.display = 'none';
+        landingDiv.style.display = 'block';
+        
+        // Inicializar funcionalidades da landing page
+        initializeLandingPage();
+        
+    } catch (error) {
+        console.error('Erro ao carregar landing page:', error);
+        // Fallback - mostrar mensagem básica
+        landingDiv.innerHTML = `
+            <div class="container">
+                <h1>Devocionais Personalizados</h1>
+                <p>Transforme seus momentos difíceis em encontros com Deus</p>
+                <button onclick="window.location.href='/login'" class="cta-button">
+                    Começar Agora
+                </button>
+            </div>
+        `;
+        loadingDiv.style.display = 'none';
+        landingDiv.style.display = 'block';
+    }
+}
+
+function initializeLandingPage() {
+    // FAQ functionality
+    window.toggleFaq = function(button) {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('.faq-icon');
+        
+        if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+            icon.textContent = '+';
+        } else {
+            answer.style.display = 'block';
+            icon.textContent = '-';
+        }
+    };
+    
+    // CTA button functionality
+    window.startFreeExperience = function() {
+        window.location.href = '/login?from=landing';
+    };
+    
+    // Demo animation
+    animateDemo();
+}
+
+function animateDemo() {
+    const steps = document.querySelectorAll('.demo-step');
+    let currentStep = 0;
+    
+    if (steps.length === 0) return;
+    
+    setInterval(() => {
+        steps.forEach(step => step.classList.remove('active'));
+        steps[currentStep].classList.add('active');
+        currentStep = (currentStep + 1) % steps.length;
+    }, 3000);
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', checkAuthAndRedirect);
+</script>
+
+<style>
+.auth-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+</style>
+{% endblock %}
